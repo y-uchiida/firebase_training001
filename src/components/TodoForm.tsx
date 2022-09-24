@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
+import { useContext, useState } from 'react'
 import { Form, InputGroup, Button } from 'react-bootstrap';
+import { TodoListContext } from '../contexts/TodoListContext';
 
-interface props {
-	setTodoList: React.Dispatch<React.SetStateAction<TodoItem[]>>
-}
-
-export const TodoForm = ({ setTodoList }: props) => {
+export const TodoForm = () => {
+	// useContext() で、コンテキストコンポーネントで設定しているaddTodo() を読み込む
+	const { addTodo } = useContext(TodoListContext);
 	const [value, setValue] = useState('');
 
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
@@ -16,11 +14,6 @@ export const TodoForm = ({ setTodoList }: props) => {
 		}
 		addTodo(value);
 		setValue('');
-	};
-
-	const addTodo = (text: string) => {
-		const newTodo: TodoItem = { id: uuidv4(), title: text, completed: false }
-		setTodoList(todoList => [...todoList, newTodo]);
 	};
 
 	return (

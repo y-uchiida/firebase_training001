@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Table } from 'react-bootstrap';
+import { TodoListContext } from '../contexts/TodoListContext';
 
-interface props {
-	setTodoList: React.Dispatch<React.SetStateAction<TodoItem[]>>,
-	todoList: TodoItem[],
-	removeTodoItem: (id: string) => void,
-	toggleCompleteTodoItem: (id: string) => void,
-};
-
-export const TodoList = ({ setTodoList, todoList, removeTodoItem, toggleCompleteTodoItem }: props) => {
+export const TodoList = () => {
+	// useContext() で、コンテキストコンポーネントで設定している状態変数および関数を読み込む
+	const { todoList, toggleCompleteTodoItem, removeTodoItem } = useContext(TodoListContext);
 
 	return (
 		<Table>
